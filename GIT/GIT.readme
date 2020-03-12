@@ -1,0 +1,105 @@
+Passo a passo
+
+cd diretorio_do_sistema
+para criar um diretório
+
+git init
+Para monitorar um arquivo
+
+git add index.html ou git add .
+Para inserir as alterações no stage
+
+git commit -m "Criando arquivo index.html com lista de cursos"
+Git status, apresenta alguns detalhes sobre o repositório do git se eu alterei algum arquivo ele aparece como nothing to commit
+
+git status
+Configurar o usuario ativo no git
+
+git config --local user.name "Seu nome aqui"
+git config --local user.email "seu@email.aqui"
+
+
+HEAD: Estado atual do nosso código, ou seja, onde o Git nos colocou
+Working tree: Local onde os arquivos realmente estão sendo armazenados e editados
+index: Local onde o Git armazena o que será commitado, ou seja, o local entre a working tree e o repositório Git em si.
+
+Logs
+
+git log
+git log --oneline
+git log -p //mostra as alterações no commit
+git log --pretty="parametros de formatação"
+
+Referencia de links e utilidades
+git log --help
+https://devhints.io/git-log
+
+Configurando o .gitignore
+
+Basta abrir o arquivo e colocar o nome dos arquivos Exemplo
+
+index.html
+ignorado.php
+
+Para ignorar uma pasta inteira
+# Para ignorar todos os arquivos e sub-pastas da pasta metadata/
+metadata/
+
+
+Criando um servidor de alterações (repositório remoto)
+No local onde for ficar o servidor
+
+mkdir servidor
+cd servidor/
+git init --bare 
+
+//Indica que este repositório só contem as alterações dos arquivos não contem uma cópia estritamente dita dos arquivos
+//Ele vai retornar initialized empty git repository in "O caminho onde ficou o servidor "  copiar este caminho
+//Voltar para pasta do projeto
+
+git remote add nome-repositorio caminho/para/o/repositorio
+git remote //Retornará os servidores configurados
+git remote -v //Retornará o diretório destes servidores
+
+Work flow
+
+git clone url_ou_caminho_do_diretório_a_ser_clonado nome/ (Opcional ->) nome_que_eu_quero_dar_a_pasta
+Subindo os commits para o repositório
+
+git push servidor master
+Puxando os dados do servidor em outro usuario
+
+git remote
+resultado -> origin
+se der isso só renomear de origin para o nome do servidor que foi criado Não é obrigatório
+git remote rename origin servidor
+Puxando os dados do servidor
+
+git pull origin master
+O nome origin é uma convenção
+
+git remote add origin http://github.com/andrews-ribeiro/exemplo-git.git
+
+Para enviar os dados para o servidor
+Sempre que for usado o comando git push
+
+git push -u origin master
+o -u significa que sempre que eu digitar o comando git push ele usar origin e master
+ou seja agora quando for enviar os arquivos bastar escrever
+
+git push
+
+porém o mais indicado é informar sem o -u 
+git push origin master
+
+Branches
+Exibe as branchs existentes
+
+git branch
+
+Branches podem ser criadas
+
+Exemplo
+git branch connect
+git branch get
+git branch vision
