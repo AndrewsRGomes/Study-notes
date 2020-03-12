@@ -1,0 +1,195 @@
+Array de dados modelo
+
+Const informacoesCliente = [
+    {
+        cpf: 15841666738,
+        nome: "Andrews ribeiro"
+    }
+]
+
+Para criar elementos dentro da TR 
+
+Criar um atributo dentro da tag tbody
+
+<tbody data-conteudo-tabela>
+</tbody>
+
+Crie uma variavel pegando a Tabela
+
+const corpoTabela = document.querySelector("[data-conteudo-tabela]");
+
+Jogar o conteudo do array dentro de uma tr
+
+const exibeCliente = (cpf, nome) => {
+
+    const linha = document.createElement('tr');
+
+    const conteudoLinha=`
+        <td>${cpf}</td>
+        <td>${nome}</td>`
+    
+    linha.innerHTML = conteudoLinha
+    
+    return linha
+}
+
+Pegar os dados e jogar dentro da tabela
+
+informacoesCliente.forEach( indice => {
+    corpoTabela.appendChild(exibeCliente(indice.cpf, indice.nome));
+)};
+
+Usando Fetch API
+
+Buscando dados da API
+
+const listarClientes = () => {
+  return fetch('http://localhost:4000/clientes')
+  .then( resposta = => {
+    return resposta.json()
+    })
+    .then( json => {
+        return json
+    })
+}
+
+Percorrer os elementos e jogar na tabela
+
+listarCliente().then( exibe => {
+   exibe.forEach( indice => {
+        corpoTabela.appendChild(exibeCliente(indice.cpf, indice.nome));
+   )};
+});
+
+Inserir um registro
+
+<script>
+
+//pegando os dados no submit do formulário
+
+const formCadastroCliente = document.querySelector('[data-form]');
+
+formCadastroCliente.addEventListener("submit, event =>{
+    event.preventDefault();
+
+    const nome = event.target.querySelector('[data-nome'])
+    const cpf = event.target.querySelector('[data-cpf'])
+
+    cadastrarClientes(nome.value, cpf.value)
+})
+
+//Enviando o registro para api
+const cadastrarClientes = (nome, cpf) => {
+    const json = JSON.stringify({
+        nome: nome,
+        cpf: cpf
+   })
+    return fetch('http://localhost:4000/clientes'), {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: json
+})
+    .then( resposta => {
+        return resposta.body
+    })
+}
+</script>
+
+Deletar Registro
+
+Na função de exibir cliente será preciso passar um novo parâmetro alem de CPF e nome, o ID.
+const exibeCliente = (cpf, nome, id) => {
+
+Na hora de jogar o conteudo no preencher tabela vai ser preciso informar o indice.id
+corpoTabela.appendChild(exibeCliente(indice.cpf, indice.nome, indice.id));
+
+
+<button type"button" onClick="removeCliente(${id})" >Excluir</button>
+
+const removeCliente = id => {
+    if(confirm("Deseja deletar o cliente ?")){
+        deletaCliente(id)
+                document.location.reload(); // atualiza a página
+    }
+}
+
+const deletaCliente = id => {
+    return fetch (`http://localhost:4000/clientes/${id}`), {
+        method: 'DELETE'
+    }
+}
+
+Editar Registro
+
+
+Foi feito sendo criado uma outra página para editar
+
+Foi criado uma pagina de edição e passou por parametro o id na função exibe cliente
+<td><a href="editar-cliente.html?id=${id}"</td>
+
+const pegaURL = new URL(window.location) //pega o endereço da página
+const id = pegaURL.searchParams.get('id') //pega o parametro que for passado para o get neste caso passamos ID
+
+//Pega os camos do formulário editar
+const inputCPF = document.querySelector('[data-cpf]');
+const inputNome = document.querySelector('[data-nome]');
+
+//Passa os parametros para a função detalhaCliente
+detalhaCliente(id).then( dados => {
+    inputCPF.value = dados[0].cpf;
+    inputNome.value = dados[0].nome;
+})
+
+//Preenche o formulário de edição
+const detalhaCliente= id => {
+     return fetch (`http://localhost:4000/clientes/${id}`)
+        then(resposta => {
+           return resposta.json()
+        })
+}
+
+
+// Nao tem haver com a edição Mensagem de Sucesso
+const mensagemSucesso = (mensagem) => {
+    const linha = document.createElement('tr');
+    const conteudoLinha = `<div class="alert alert-sucesso` role="alert"> ${mensagem </div>`
+}
+const mensagemErro = (mensagem) => {
+    const linha = document.createElement('tr');
+    const conteudoLinha = `<div class="alert alert-warning` role="alert"> ${mensagem </div>`
+}
+
+
+const formEditacao = document.querySelector ('[data-form-editar]')
+
+formEdicao.addEventListener('submit', event => {
+    event.preventDefault();
+    
+    editaCliente(id, inputCPF.value inputNome.value)
+    .then(resposta => {
+        if(resposta.status === 200) {
+            formEdicao.appendChild(mensagemSucesso("Cliente Editado com sucesso"))    
+        } else {
+            formEdicao.appendChild(mensagemErro("Erro na edição do cliente"))    
+        }
+    })
+
+//PUT é para atualizar
+const editaCliente = (id ,cpf ,nome) =>{
+    const json = JSON.stringify({
+        nome: nome,
+        cpf: cpf
+   })
+    return fetch(`http://localhost:4000/clientes/${id}`), {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: json
+})
+}
+
+
+
