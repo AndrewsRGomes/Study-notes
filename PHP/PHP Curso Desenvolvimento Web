@@ -1,0 +1,121 @@
+<?php
+// PHP Curso Desenvolvimento Web
+
+
+//OPERADOR TERNARIO
+//<CONDIÇÃO> ? TRUE : FALSE
+
+$usuario_possui_cartao_loja ? 'SIM' : 'NÃO';
+$usuario_possui_cartao_loja ? true : false ;
+//pode passar o operador ternario para uma variavel
+$teste = $usuario_possui_cartao_loja ? 'SIM' : 'NÃO';
+
+
+//imprimindo o teste
+echo $teste;
+
+?>
+
+
+<?php
+// PHP Curso Desenvolvimento Web
+//SWITCH/CASE
+$opcao =2
+
+switch (opcao){
+
+	case 1:
+	//trecho de código qeu será executado 
+	break;
+
+	case 2:
+	//trecho de código qeu será executado 
+	break;
+
+
+	default :
+	//default é = ao else é opcional
+	//trecho de código qeu será executado 
+	break;
+}
+?>
+
+<?php
+// PHP Curso Desenvolvimento Web
+//Funções VOID (Sem Retorno)
+function exibirBoasVindas(){
+
+	echo 'Bem vindo!'
+}
+	
+	//abaixo o retorno trará o echo que esta dentro da função.
+	exibirBoasVindas();
+
+?>
+
+<?php
+// PHP Curso Desenvolvimento Web
+//Funções com retorno
+function calcularAreaTerreno($largura, $comprimento){
+//function calcularAreaTerreno(parametro tambem chamados de argumentos){
+
+	$area = $largura * $comprimento;
+	return $area;
+}
+	
+	//abaixo o retorno da função fara a multiplicação da largua * comprimento e exibira na chamada da função
+	echo calcularAreaTerreno(30,50)
+
+	//outras formas
+	$resultado = calcularAreaTerreno(30,50)
+	echo $resultado
+
+?>
+
+
+<?php
+// PHP Curso Desenvolvimento Web
+//Funções nativas para tarefas matematicas
+$numero = 9.754;
+
+ceil($numero) //->arredonda o valor para cima
+floor($numero) //->arredonda o valor para baixo
+round($numero) //->arredonda o valor com base nas casas decimais
+sqrt($numero) //->Retorna a raiz quadrada
+rand() //->gera um inteiro aleatório
+rand(10, 20) //->gera um inteiro aleatório de 0 a 20
+
+
+?>
+
+<?php
+// PHP Curso Desenvolvimento Web
+//Funções nativas para manipular datas
+
+date(formato) //->recupera a data atual
+strtotime(data) //-> transformar datas textuais em segundos
+
+?>
+
+
+<?php 
+//verfica e foi setado o login
+if(isset($_GET['login'])){
+echo($_get['LOGIN']);
+
+}
+
+?>
+
+
+<?php 
+//verfica e foi setado o login
+//retorna mensagem de erro
+if(isset($_GET['login']) && $_GET['login'] == 'erro' ){
+?>
+
+	<div class="text-danger">
+		Usuario ou senha inválido(s)
+	</div>
+
+<?php } ?>

@@ -1,0 +1,12 @@
+PACKAGE.JSON SERÁ CRIADO A CADA PROJETO
+
+Para criar o package ele grava todas OS MODULOS é o que será lido ao subir a aplicação, sempre colocar para ler este package
+
+NPM INIT 
+
+PARA INSTALAR ALGUM MODULO
+
+NPM INSTALL EXPRESS --SAVE
+
+NÃO PRECISA INSTALAR NO SERVIDOR SÓ NO LOCAL ONDE ESTA DESENVOLVENDO 
+NPM INSTALL NODEMON -G

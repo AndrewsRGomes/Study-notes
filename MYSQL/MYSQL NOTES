@@ -1,0 +1,105 @@
+#MYSQL NOTES
+
+
+#Como fazer uma procedure
+
+
+#ESTRUTURA WHILE E IF
+
+DELIMITER //
+CREATE PROCEDURE proc_acumula_w (valor_teto INT)
+
+main:BEGIN
+	DECLARE contador INT DEFAULT 0;
+	DECLARE soma INT DEFAULT 0;
+
+	IF valor_teto <1 THEN
+		SELECT 'O VALOR DEVE SER MAIOR QUE ZERO' AS ERRO;
+		LEAVE main;
+
+	END IF;
+
+	WHILE contador < valor_teto DO
+		SET contador = contador + 1;
+		SET soma = soma + contador;
+	END WHILE;
+
+	SELECT SOMA;
+END //
+DELIMITER;
+
+
+#Chama a procedure passando  oparametro informado no create da procedure 
+CALL proc_acumula_w(20);
+
+
+
+#ESTRURA REPEAT
+DELIMITER //
+CREATE PROCEDURE proc_tabuada_r (tabuada INT)
+
+    BEGIN
+	DECLARE contador  INT DEFAULT 0;
+	DECLARE resultado INT DEFAULT 0;
+
+	REPEAT
+		SET contador = contador + 1;
+		set resultado = tabuada * contador;
+		select CONCAT(tabuada, 'x', contador, '=',resultado) as resultado;
+	UNTIL contador > 9
+	END REPEAT;
+
+END//
+DELIMITER;
+
+call proc_tabuada_r(6)
+
+
+#TABELA TEMPORARIA
+DELIMITER //
+CREATE PROCEDURE proc_tabuada_r_t (tabuada INT)
+	BEGIN
+		
+		DECLARE contador  INT DEFAULT 0;
+		DECLARE resultado INT DEFAULT 0;
+		CREATE TEMPORARY TABLE temp_tab(res VARCHAR(50));
+
+	REPEAT
+		SET contador=contador+1;
+		SET resultado=tabuada*contador;
+		-- REALIZANDO SELECT COM INSERT --
+		INSERT INTO temp_tab
+		SELECT CONCAT(tabuada, 'x', contador, '=',resultado) AS resultado;
+	UNTIL contador > 9
+	END REPEAT;
+	
+	-- SELECT PARA APRESENTAR OS VALORES
+	SELECT * FROM temp_tab;
+	DROP TEMPORARY TABLE temp_tab;
+END//
+DELIMITER;
+
+CALL proc_tabuada_r_t(4);
+
+
+
+#ESTRURA LOOP
+DELIMITER //
+CREATE PROCEDURE proc_tabuada_l (tabuada INT)
+
+    BEGIN
+	DECLARE contador  INT DEFAULT 0;
+	DECLARE resultado INT DEFAULT 0;
+
+	loop_tabuada: LOOP
+		SET contador = contador + 1;
+		SET resultado = tabuada * contador;
+		SELECT CONCAT(tabuada, 'x', contador, '=',resultado);
+		IF contador > 9 THEN
+			LEAVE loop_tabuada;
+		END IF;
+	END LOOP loop_tabuada;
+END//
+DELIMITER;
+
+CALL proc_tabuada_l(5);

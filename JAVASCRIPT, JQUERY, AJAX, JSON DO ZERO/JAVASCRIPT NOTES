@@ -1,0 +1,66 @@
+//Conteudo do curso de javascript
+
+//AULA01
+//Javascript sempre no final da página
+<script src="js/scripts.js"></script>
+
+//AULA3 variaveis
+var latitude = 50.8763;
+console.log(latitude);
+
+//AULA 4
+
+console.log('Concatenar : ' + nome + ' ' + sobrenome);
+
+var string_exemplo = 'birobiro';
+console,log('Pegar determinada letra de uma string:' + string_exemplo[0]);
+
+ //Pegar quantidade de caracter
+ console.log('numero de caracteres' + string_exemplo.lenght); //saida 14 no console
+
+
+//AULA 11
+//selecionaro elemento e pegar o texto html dele
+document.getElementById("caixa_azul").innerHTML;
+
+//var conteudo_var = document.getElementById("caixa_azul").innerHTML;
+
+console.log(conteudo_var);
+
+document.getElementById("caixa_amarela").innerHTML = conteudo_var; 
+
+//concatenar informações
+document.getElementById("caixa_amarela").innerHTML = '<h1>' + conteudo_var + '</h1>';
+
+//AULA 12 - FUNÇÕES
+
+function soma_numeros(){
+	
+	var x = 5;
+	var y = 2;
+	var soma = x + y;
+	console.log(soma);
+} 
+
+soma_numeros();
+
+
+function soma_argumentos(num1,num2){
+	
+	var soma = num1 + num2;
+	console.log(soma);
+} 
+
+soma_argumentos(20,10);
+
+
+function soma_argumentos(num1,num2){
+	
+	var soma = num1 + num2;
+	return soma;
+} 
+
+console.log("Resultado da soma" + soma_argumentos(20,30));
+
+//Formularios"
+document.getElementById(")

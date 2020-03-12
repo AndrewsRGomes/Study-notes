@@ -1,0 +1,107 @@
+#Primeiro passo com o GIT criar um usuario
+
+git config --global user.name "Andrews Gomes"
+git config --global user.email "andrews@jcacontadores.com.br"
+
+
+#Exibir as configurações do seu git
+
+git config --list
+
+#Criando um repositório GIT
+
+#Colocar no diretorio do projeto
+cd c:/meu projeto
+
+#Iniciar o repositório
+git init
+
+#listar os arquivos do diretorio
+dir
+
+#listar os arquivos ocultos do diretório
+dir -a
+
+
+#mostra qual é o status do repositório
+#Ele exibira quais arquivos não estão rastreados pelo git
+
+git status
+
+#Adicionar um arquivo como rastreado pelo GIT
+
+-> Adicionar um unico arquivo
+git add arquivo.txt
+
+-> Adicionar todos os arquivos de um diretório
+git add --all
+git add -A
+git add .
+
+#Para salvar um arquivo no repositório local
+
+git commit -m "Adição de mascara no campo data"
+
+#o -m "mensagem:Alterado query" serve para deixar uma mensagem para quem for ver as novas alterações de versão
+
+
+#Este comando exibe quais foram as alterações realizadas nos arquivos editados e salvos nas pastas, exibindo as linhas
+
+git diff
+
+git diff --cached
+git dif --staged
+
+
+
+
+#Este comando exibe todas os commits realizados no projeto
+
+git log
+
+-->Resumido em uma linha
+git log --oneline 
+
+
+#Com este comando é possivel acessar logs de modificações anteriores, e buscar arquivos em versões anteriores do Commit até achar algum arquivo que a gente queria achar, este número é o Hash codigo que fica no campo commit de cada commit acessivel no git log.
+
+git checkout 521478
+
+
+#Este comando pode ser usado para voltar um arquivo para uma versão anterior sem salvar as modificações que voce fez no arquivo, por exemplo, você editou um arquivo e deseja que ele volte para a versão anterior que esta no estado inicial como se você não tivesse feito
+
+git checkout config.txt
+
+
+#Desfaz todas as modificações feitas(Precisam estar monitorados pelo git com o git add)
+
+git reset
+
+git reset --hard (Sem perguntar se deseja apagar)
+
+#Remove arquivos adicionados que não estão sendo rastreados pelo GIT
+
+git clean -f
+
+
+#Para ignorar alguns determinados arquivos que não precisam ser copiados sempre. Por exemplo, arquivos de bootstrap, fontawesome, etc. Criar um arquivo sem nome com a extensão .gitignore
+
+Dentro do arquivo gitignore colocar uma referência podendo ser:
+
+arquivo.txt
+*.dll
+*.bmp
+
+
+#O comando abaixo copiará a pasta "meuprojeto" e criará uma nova pasta com as mesmas coisas do projeto.
+#deste modo é possivel clonar os dados de um repositório sendo a propria maquina como servidor , ou um link de um repositório no git por exemplo.
+
+git clone meuprojeto/ copia_meuprojeto
+
+git clone https://github.com/MeuProjeto/meuprojeto-novo.git 
+
+
+
+
+
+
